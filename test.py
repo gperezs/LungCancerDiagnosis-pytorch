@@ -7,7 +7,6 @@ import numpy as np
 import sys
 import os
 from sklearn.metrics import roc_auc_score
-import pandas as pd
 import argparse
 
 os.environ["CUDA_VISIBLE_DEVICES"] = '2'
