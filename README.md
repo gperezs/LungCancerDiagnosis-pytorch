@@ -108,3 +108,16 @@ If the dataset from the [ISBI 2018 Lung Nodule Malignancy Prediction challenge](
 In folder `data/sorted_slices_jpgs/` the program will save images of the axial, sagittal and coronal planes of the 30 detected nodules with highest score of each patient.
 
 
+## Citing this work
+
+If you find this work useful in your research, please consider citing:
+```
+@article{PA_MBEC2020,
+    author = "{G. Perez and P. Arbelaez}",
+    title = "{Automated lung cancer diagnosis using three-dimensional convolutional neural networks}",
+    journal = "{Medical & Biological Engineering & Computing}",
+    year = {2020},
+    Month = {jun},
+    doi = {10.1007/s11517-020-02197-7},
+}
+```
