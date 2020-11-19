@@ -85,7 +85,7 @@ $ pip install dicom
 
 ## Trained models
 
-Download the trained models from this [link](https://www.dropbox.com/s/to7pmlajtr0tyos/models.zip?dl=0). Detector model was trained with the [LIDC-IDRI dataset](https://wiki.cancerimagingarchive.net/display/Public/LIDC-IDRI) and the predictor with the [Kaggle DSB2017 dataset](https://www.kaggle.com/c/data-science-bowl-2017).
+Trained models are included with this repository at in `models/`. Detector model was trained with the [LIDC-IDRI dataset](https://wiki.cancerimagingarchive.net/display/Public/LIDC-IDRI) and the predictor with the [Kaggle DSB2017 dataset](https://www.kaggle.com/c/data-science-bowl-2017).
 
 ## Lung cancer diagnosis
 
