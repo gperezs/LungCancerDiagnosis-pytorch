@@ -1,0 +1,8 @@
+# local package
+# -e .
+
+# external requirements
+scipy
+scikit-image
+scikit-learn
+pandas
