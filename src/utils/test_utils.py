@@ -25,9 +25,9 @@ def test(model, test_loader, args):
     return output, target.data.eq(1).cpu().numpy()
 
 def prep_dataset(data,label):
-    data = np.transpose(data, (4, 3, 2, 1, 0))
-    #plt.imshow(data[0,0,12,:,:])
-    #plt.show()
+    data = np.transpose(data, (4, 3, 0, 2, 1))
+    plt.imshow(data[0,0,12,:,:])
+    plt.show()
     
     label = label[0:len(data)]
 

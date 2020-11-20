@@ -58,24 +58,24 @@ if __name__ == '__main__':
     ini_t_time = time.time()
 
     print('\ncreating patients (dicom-->npy)...')
-    #create_patients_from_dicom(args.dicom_dir, args.vols_dir)
+    create_patients_from_dicom(args.dicom_dir, args.vols_dir)
 
     print('\nextracting candidates...')
-    #candidate_extraction(args.vols_dir, args.cands_dir)
+    candidate_extraction(args.vols_dir, args.cands_dir)
 
     print('\ncreating candidate slices...')
-    #create_candidate_slices(args.vols_dir, args.cands_dir, args.slices_dir)
+    create_candidate_slices(args.vols_dir, args.cands_dir, args.slices_dir)
    
     if not args.cuda:
         print('\nrunning nodule detector (this might take a while)...')
     else:
         print('\nrunning nodule detector...')
-    #nodule_detector.run(args.slices_dir) #outputs scores_detector_test.npz
+    nodule_detector.run(args.slices_dir) #outputs scores_detector_test.npz
 
     print('\napplying nms and sorting slices...')
-    #Sc = np.load('scores_detector_test.npz')
-    #apply_nms(Sc, args.vols_dir, args.cands_dir, args.slices_dir, args.sorted_slices_dir, 
-    #                                                             args.sorted_slices_jpgs_dir)
+    Sc = np.load('scores_detector_test.npz')
+    apply_nms(Sc, args.vols_dir, args.cands_dir, args.slices_dir, args.sorted_slices_dir, 
+                                                                 args.sorted_slices_jpgs_dir)
     
     print('\ncreating top-5 nodule dataset...')
     data, label = create_test_dataset(args.sorted_slices_dir, 1)

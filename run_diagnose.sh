@@ -1,6 +1,6 @@
 # Demo for lung cancer diagnosis.
 
-IS_ISBI=${IS_ISBI:-0}
+ISBI=${ISBI:-1}
 GPU=${GPU:-''}
 
 while [ $# -gt 0 ]; do
@@ -18,7 +18,7 @@ mkdir -p data/slices
 mkdir -p output/sorted_slices
 mkdir -p output/sorted_slices_images
 
-if [ $IS_ISBI -eq 1 ]
+if [ $ISBI -eq 1 ]
 then
     CUDA_VISIBLE_DEVICES=$GPU python src/test_ISBI.py 
 else
