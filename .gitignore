@@ -1,11 +1,10 @@
 # Data folders
-data/ISBI-deid-TRAIN/
-#checkpoints/
+data/dicom/
+output/
 
 # File extensions
 *.swp
 *.npy
-*.jpg
 #*.pth
 
 # Byte-compiled / optimized / DLL files
