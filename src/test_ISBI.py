@@ -95,7 +95,7 @@ if __name__ == '__main__':
     if load_model:
         best_loss = test(0)
 
-output1 = np.load('preds3D_val.npy') #subtraction of year 2000 and 1999 masks + sum + sigmoid scores
+output1 = np.load('src/preds3D_val.npy') #subtraction of year 2000 and 1999 masks + sum + sigmoid scores
 epoch = 0
 output, label = tu.test(epoch, model, test_loader, args) 
 output = output.data.cpu().numpy()

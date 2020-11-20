@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
     print('\nscores(%): ')
     np.set_printoptions(precision=5)
-    print(output[:,1]*100)
+    print(output[:,1].reshape(-1,1)*100)
 
     print('\ntotal elapsed time: %0.2f min\n' % ((time.time() - ini_t_time)/60.0))
 
