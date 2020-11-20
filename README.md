@@ -63,7 +63,6 @@ the axial, sagittal and coronal planes of the 30 detected nodules with highest s
 folder `output/sorted_slices_jpgs/` (As the example shown below). 
 
 <h1 align="center">
-  <br>
   <a><img width="1000" src="output_sample.jpg" alt="ranked_nodules"></a>
 </h1>
 
