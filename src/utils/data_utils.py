@@ -1,4 +1,3 @@
-
 import time
 import numpy as np
 import random
@@ -9,6 +8,8 @@ import scipy.misc
 from misc_utils import (load_scan, get_pixels_hu, resample, segment_lung_mask, 
                         erode, reconstruct, regional_maxima, centroids_calc)
 from scipy import ndimage
+
+import matplotlib.pyplot as plt
 
 def create_test_dataset(data_dir, AUG):
     NSL = 5 #Number of slices (lanes) for multi-line network
@@ -23,10 +24,11 @@ def create_test_dataset(data_dir, AUG):
     f['arr_2'] = patient name
     f['arr_3'] = mosaic
     """
-
-    data = np.swapaxes(f['arr_0'],0,3)
-    data = np.swapaxes(data,1,2)
+    data = np.transpose(f['arr_0'], (1, 3, 2, 0))
     data_train = data[:,:,:,0:NSL]
+   
+    #plt.imshow(data_train[:,:,12,0])
+    #plt.show()
 
     label_train = np.load('src/ISBI_train_label.npy')
     scores_train = f['arr_1'][0:NSL]
@@ -41,8 +43,7 @@ def create_test_dataset(data_dir, AUG):
         start_time = time.time()
         filename = os.path.join(data_dir, files[ff+1])
         f = np.load(filename)
-        data = np.swapaxes(f['arr_0'],0,3)
-        data = np.swapaxes(data,0,2)
+        data = np.transpose(f['arr_0'], (1, 3, 2, 0))
         scores = f['arr_1']
         data = np.expand_dims(data, axis=4)
         scores = np.expand_dims(scores, axis=0)

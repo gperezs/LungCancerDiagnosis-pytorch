@@ -9,6 +9,8 @@ import os
 
 from detector import Detector
 
+import matplotlib.pyplot as plt
+
 def run(slid_dir):
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
     parser.add_argument('--batch-size', type=int, default=64, metavar='N',
@@ -42,8 +44,6 @@ def run(slid_dir):
     
     def test_eval(epoch):
         model.eval()
-        test_loss = 0
-        correct = 0
         scores = []
         with torch.no_grad():
             for batch_idx, (data, target) in enumerate(test_loader):
@@ -52,14 +52,11 @@ def run(slid_dir):
                 data, target = Variable(data), Variable(target)
                 output = model(data)
                 pred = output.data.max(1)[1]
-                correct += pred.eq(target.data).cpu().sum()
                 if batch_idx % args.log_interval == 0:
                     print('    detecting nodules: {} [{}/{} ({:.0f}%)]'.format(
                         epoch, batch_idx * len(data), len(test_loader.dataset),
                         100. * batch_idx / len(test_loader)))
                 scores.extend((output.data).cpu().numpy())
-        test_loss = test_loss
-        test_loss /= len(test_loader)
         return scores
 
     files = os.listdir(slid_dir)
@@ -74,16 +71,20 @@ def run(slid_dir):
     idPat = 0
     tot_time = time.time()
     for f in range(len(files)):
-        tmp = np.load(os.path.join(slid_dir, files[f]))
-        slices = tmp
-        slices = np.swapaxes(slices, 2, 3)
+        slices = np.load(os.path.join(slid_dir, files[f]))
+        slices = np.transpose(slices, (0, 1, 3, 2))
+       
+        #for i in range(100):
+        #    plt.subplot(10,10,i+1)
+        #    plt.imshow(slices[11850+i,12,:,:])
+        #plt.show()
+        #aa = aaaa
+        
         slices = np.expand_dims(slices, axis=1)
-        slices = slices.astype(np.float32)
         print('\n  subject %d/%d loaded'%(f+1, len(files)))
         labels = np.zeros(len(slices))
-        labels = labels.astype(np.int64)
-        vdata = torch.from_numpy(slices)
-        vlabel = torch.from_numpy(labels)
+        vdata = torch.from_numpy(slices).float()
+        vlabel = torch.from_numpy(labels).int()
         testv = data_utils.TensorDataset(vdata, vlabel)
         test_loader = data_utils.DataLoader(testv, batch_size=args.batch_size, shuffle=False)
     

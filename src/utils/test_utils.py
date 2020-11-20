@@ -8,10 +8,11 @@ import os
 import time
 import imageio
 
+import matplotlib.pyplot as plt
+
 def test(model, test_loader, args):
     args.cuda = torch.cuda.is_available()
     model.eval()
-    test_loss = 0
     correct = 0
     with torch.no_grad():
         for batch_idx, (data, target) in enumerate(test_loader):
@@ -24,15 +25,14 @@ def test(model, test_loader, args):
     return output, target.data.eq(1).cpu().numpy()
 
 def prep_dataset(data,label):
-    data = np.swapaxes(data,2,4)
-    data = np.swapaxes(data,1,3)
-    data = np.swapaxes(data,0,2)
-    label = label.astype(np.int64)
-    label = label[0:np.shape(data)[0]]
+    data = np.transpose(data, (4, 3, 2, 1, 0))
+    #plt.imshow(data[0,0,12,:,:])
+    #plt.show()
+    
+    label = label[0:len(data)]
 
-    t2data = torch.from_numpy(data)
-    t2data = t2data.float()
-    t2label = torch.from_numpy(np.transpose(label))
+    t2data = torch.from_numpy(data).float()
+    t2label = torch.from_numpy(np.transpose(label)).int()
     test = data_utils.TensorDataset(t2data, t2label)
     return test
 
@@ -47,6 +47,7 @@ def apply_nms(Sc, vol_dir, cand_dir, in_dir, out_dir, mosaic_dir):
     for i in range(len(D)):
         start_time = time.time()
         pt = np.load(os.path.join(in_dir, D[i])) #load patient slices (ZZx24x24x24)
+        pt = np.transpose(pt, (0, 1, 3, 2))
         cand = np.load(os.path.join(cand_dir, D[i])) #load patient candidates of 2000
         vol = np.load(os.path.join(vol_dir, D[i])) #load patient volume of 2000
 
