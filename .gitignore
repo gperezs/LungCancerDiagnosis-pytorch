@@ -4,6 +4,8 @@ data/ISBI-deid-TRAIN/
 
 # File extensions
 *.swp
+*.npy
+*.jpg
 #*.pth
 
 # Byte-compiled / optimized / DLL files

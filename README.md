@@ -21,40 +21,6 @@ $ git clone https://github.com/gperezs/LungCancerDiagnosis-pytorch.git
 $ cd LungCancerDiagnosis-pytorch
 ```
 
-In the following sections we show two ways to setup StarcNet. Use the one that suits you best:
-* [Using virtualenv](#using-virtualenv)
-* [Using Anaconda](#using-anaconda)
-
-### Using virtualenv
-
-2. **Install virtualenv:** To install virtualenv run after installing pip:
-
-```
-$ sudo pip3 install virtualenv
-```
-
-3. **Virtualenv  environment:** To set up and activate the virtual environment,
-run:
-```
-$ virtualenv -p /usr/bin/python3 venv3
-$ source venv3/bin/activate
-```
-
-To install requirements, run:
-```
-$ pip install -r requirements.txt
-```
-
-To install dicom library run:
-```
-$ pip install dicom
-```
-
-4. **PyTorch:** To install pytorch run:
-```
-$ pip install torch torchvision
-```
-
 -------
 ### Using Anaconda
 
@@ -75,11 +41,6 @@ To install requirements, run:
 $ conda install --yes --file requirements.txt
 ```
 
-To install dicom library run:
-```
-$ pip install dicom
-```
-
 4. **PyTorch:** To install pytorch follow the instructions [here](https://pytorch.org/).
 </details>
 
@@ -89,23 +50,32 @@ Trained models are included with this repository at in `models/`. Detector model
 
 ## Lung cancer diagnosis
 
-To run the code save the folder of each patient with the dicom files in the folder `data/ISBI-deid-TRAIN/`. Then, sun:
+To run the code save the folder of each patient with the dicom files in the folder `data/ISBI-deid-TRAIN/`. Then, run:
 ```
-python test.py
+bash run_diagnose
 ```
+If a the program is ran in the CPU it might take several minutes to complete. When a CUDA device is available, run:
+```
+bash run_diagnose --GPU=<gpu id>
+```
+The program will print a single lung cancer probability per subject. Also, the program will save images of 
+the axial, sagittal and coronal planes of the 30 detected nodules with highest score of each patient in 
+folder `output/sorted_slices_jpgs/` (As the example shown below). 
 
-The program will print a single lung cancer probability per subject.
+<h1 align="center">
+  <br>
+  <a><img width="1000" src="output_sample.jpg" alt="ranked_nodules"></a>
+</h1>
 
 ### Run with ISBI 2018 lung challenge subjects
 
 To run the code save the folder of each patient with the dicom files (of the ISBI 2018 Lung challenge) in the folder `data/ISBI-deid-TRAIN/`. Then, run:
 ```
-python test_ISBI.py
+bash run_diagnose.sh --IS_ISBI=1
 ```
+
 If the dataset from the [ISBI 2018 Lung Nodule Malignancy Prediction challenge](https://bit.ly/2JPNnGS) is used, the AUC will be printed using the challenge released labels (including the mask post-processing). 
 
-
-In folder `data/sorted_slices_jpgs/` the program will save images of the axial, sagittal and coronal planes of the 30 detected nodules with highest score of each patient.
 
 
 ## Citing this work
