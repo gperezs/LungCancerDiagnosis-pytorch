@@ -48,7 +48,7 @@ class Predictor(nn.Module):
         self.bn13 = nn.BatchNorm3d(128)
         self.relu13 = nn.ReLU()
         self.fc2 = nn.Linear(128*5, 2)
-        self.softmax = nn.Softmax()
+        self.softmax = nn.Softmax(dim=1)
         
     def forward(self, x):
         x0 = x[:,0,:,:,:].unsqueeze(1)

@@ -76,7 +76,7 @@ if __name__ == '__main__':
     Sc = np.load('scores_detector_test.npz')
     apply_nms(Sc, args.vols_dir, args.cands_dir, args.slices_dir, args.sorted_slices_dir, 
                                                                  args.sorted_slices_jpgs_dir)
-
+    
     print('\ncreating top-5 nodule dataset...')
     data, label = create_test_dataset(args.sorted_slices_dir, 1)
     testds = prep_dataset(data, label)
@@ -87,10 +87,6 @@ if __name__ == '__main__':
     if args.cuda:
         model.cuda()
 
-    #model_dict = model.state_dict()
-    #pretrained_dict = torch.load(args.resume)
-    #pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict and v.size() == model_dict[k].size() }
-    #model_dict.update(pretrained_dict)
     if args.cuda:
         model.load_state_dict(torch.load(args.resume))
     else:
@@ -99,8 +95,9 @@ if __name__ == '__main__':
     output, label = test(model, test_loader, args) 
     output = output.data.cpu().numpy()
 
-    print('\nscore(s): ')
-    print(output[:,1])
+    print('\nscores(%): ')
+    np.set_printoptions(precision=5)
+    print(output[:,1]*100)
 
     print('\ntotal elapsed time: %0.2f min\n' % ((time.time() - ini_t_time)/60.0))
 
