@@ -58,13 +58,13 @@ if __name__ == '__main__':
     ini_t_time = time.time()
 
     print('\ncreating patients (dicom-->npy)...')
-    #create_patients_from_dicom(args.dicom_dir, args.vols_dir)
+    create_patients_from_dicom(args.dicom_dir, args.vols_dir)
 
     print('\nextracting candidates...')
-    #candidate_extraction(args.vols_dir, args.cands_dir)
+    candidate_extraction(args.vols_dir, args.cands_dir)
 
     print('\ncreating candidate slices...')
-    #create_candidate_slices(args.vols_dir, args.cands_dir, args.slices_dir)
+    create_candidate_slices(args.vols_dir, args.cands_dir, args.slices_dir)
    
     if not args.cuda:
         print('\nrunning nodule detector (this might take a while)...')
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     data, label = create_test_dataset(args.sorted_slices_dir, 1)
     testds = prep_dataset(data, label)
     test_loader = data_utils.DataLoader(testds, batch_size=args.batch_size, shuffle=False)
-    print('\ndataset ready!')
+    print('  dataset ready!')
 
     model = Predictor()
     if args.cuda:

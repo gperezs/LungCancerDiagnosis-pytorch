@@ -113,6 +113,6 @@ def apply_nms(Sc, vol_dir, cand_dir, in_dir, out_dir, mosaic_dir):
         #Save .npz file with sorted nodules
         filename = os.path.join(out_dir, patient)
         np.savez(filename, sorted_NMS_data, sorted_NMS_scores, sorted_NMS_cand, patient, mosaic)
-        print('  nms&sort - Patient: ' + str(i+1)  + '/' + str(len(D)) +
+        print('  subject: ' + str(i+1)  + '/' + str(len(D)) +
           ' (' + str(round(time.time() - start_time,2)) + 's)' )
 

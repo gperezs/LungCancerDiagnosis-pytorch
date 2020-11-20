@@ -50,7 +50,9 @@ Trained models are included with this repository at in `models/`. Detector model
 
 ## Lung cancer diagnosis
 
-To run the code save the folder of each patient with the dicom files in the folder `data/ISBI-deid-TRAIN/`. We already include a subject (LIDC-IDRI-003) in this repository. To see a demo with this subject:
+To run the code save the folder of each subject with the dicom files in the folder `data/ISBI-deid-TRAIN/` 
+(the program will diagnose all subjects in that folder). We already include a subject (LIDC-IDRI-003) in 
+this repository. To see a demo with this subject:
 ```
 bash run_diagnose
 ```
