@@ -12,7 +12,7 @@ from scipy import ndimage
 import matplotlib.pyplot as plt
 
 def create_test_dataset(data_dir, AUG):
-    NSL = 5 #Number of slices (lanes) for multi-line network
+    NSL = 5 #Number of slices (pathways) for multi-way network
 
     files = os.listdir(data_dir)
     files.sort()
@@ -24,7 +24,7 @@ def create_test_dataset(data_dir, AUG):
     f['arr_2'] = patient name
     f['arr_3'] = mosaic
     """
-    data = np.transpose(f['arr_0'], (1, 3, 2, 0))
+    data = np.transpose(f['arr_0'], (1, 2, 3, 0))
     data_train = data[:,:,:,0:NSL]
    
     #plt.imshow(data_train[:,:,12,0])
@@ -43,7 +43,7 @@ def create_test_dataset(data_dir, AUG):
         start_time = time.time()
         filename = os.path.join(data_dir, files[ff+1])
         f = np.load(filename)
-        data = np.transpose(f['arr_0'], (1, 3, 2, 0))
+        data = np.transpose(f['arr_0'], (1, 2, 3, 0))
         scores = f['arr_1']
         data = np.expand_dims(data, axis=4)
         scores = np.expand_dims(scores, axis=0)
