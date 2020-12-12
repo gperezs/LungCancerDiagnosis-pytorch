@@ -24,7 +24,7 @@ def create_test_dataset(data_dir, AUG):
     f['arr_2'] = patient name
     f['arr_3'] = mosaic
     """
-    data = np.transpose(f['arr_0'], (1, 2, 3, 0))
+    data = np.transpose(f['arr_0'], (2, 1, 3, 0))
     data_train = data[:,:,:,0:NSL]
    
     #plt.imshow(data_train[:,:,12,0])
@@ -43,7 +43,7 @@ def create_test_dataset(data_dir, AUG):
         start_time = time.time()
         filename = os.path.join(data_dir, files[ff+1])
         f = np.load(filename)
-        data = np.transpose(f['arr_0'], (1, 2, 3, 0))
+        data = np.transpose(f['arr_0'], (2, 1, 3, 0))
         scores = f['arr_1']
         data = np.expand_dims(data, axis=4)
         scores = np.expand_dims(scores, axis=0)
@@ -113,11 +113,12 @@ def create_patients_from_dicom(dicom_dir, vols_dir):
     for i in range(len(patients)):
         start_time = time.time()
         subdir1 = os.listdir(os.path.join(dicom_dir, patients[i]))
+        subdir1.sort()
         dcm_path, cont = os.path.join(dicom_dir, patients[i]), 0
         dcm_files_found = False
         for d in range(3): # check up to 3 cascaded folders for dcm files
             if not any(fname.endswith('.dcm') for fname in os.listdir(dcm_path)):
-                dcm_path = os.path.join(dcm_path, os.listdir(dcm_path)[0])
+                dcm_path = os.path.join(dcm_path, os.listdir(dcm_path)[-1]) #to take isbi 2000 patients
                 dcm_files_found = True
             else:
                 break

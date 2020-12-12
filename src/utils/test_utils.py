@@ -26,8 +26,6 @@ def test(model, test_loader, args):
 
 def prep_dataset(data,label):
     data = np.transpose(data, (4, 3, 0, 1, 2))
-    #plt.imshow(data[0,0,12,:,:])
-    #plt.show()
     
     label = label[0:len(data)]
 
@@ -47,7 +45,6 @@ def apply_nms(Sc, vol_dir, cand_dir, in_dir, out_dir, mosaic_dir):
     for i in range(len(D)):
         start_time = time.time()
         pt = np.load(os.path.join(in_dir, D[i])) #load patient slices (ZZx24x24x24)
-        pt = np.transpose(pt, (0, 1, 3, 2))
         cand = np.load(os.path.join(cand_dir, D[i])) #load patient candidates of 2000
         vol = np.load(os.path.join(vol_dir, D[i])) #load patient volume of 2000
 

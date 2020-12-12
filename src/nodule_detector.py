@@ -73,13 +73,6 @@ def run(slid_dir):
     for f in range(len(files)):
         slices = np.load(os.path.join(slid_dir, files[f]))
         slices = np.transpose(slices, (0, 1, 3, 2))
-       
-        #for i in range(100):
-        #    plt.subplot(10,10,i+1)
-        #    plt.imshow(slices[11850+i,12,:,:])
-        #plt.show()
-        #aa = aaaa
-        
         slices = np.expand_dims(slices, axis=1)
         print('\n  subject %d/%d loaded'%(f+1, len(files)))
         labels = np.zeros(len(slices))
