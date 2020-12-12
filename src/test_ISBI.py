@@ -99,13 +99,8 @@ if __name__ == '__main__':
     PP = 0.68
     outputx = output[:,1]*PP + output1[:,0]*(1-PP)
 
-    print('\nlung cancer probability: ')
-    for i in range(len(output)):
-        print('%.2f%% (%.2f%%) label: %d'%(output[i,1]*100, outputx[i]*100, label[i]))
-
-    #if np.shape(data)[4] > 1:
     AUC = roc_auc_score(label, outputx)
-    print('\n%s\nAUC: %.3f\n%s'%(28*'*',AUC,28*'*'))
+    print('\n%s\nAUC: %.4f\n%s'%(28*'*',AUC,28*'*'))
 
     print('\ntotal elapsed time: %0.2f min\n' % ((time.time() - ini_t_time)/60.0))
 

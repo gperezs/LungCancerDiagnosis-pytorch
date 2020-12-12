@@ -28,7 +28,7 @@ def parse_args():
     Parse input arguments
     """
     parser = argparse.ArgumentParser(description='PyTorch LungCancerPredictor Test')
-    parser.add_argument('--batch-size', type=int, default=15, metavar='N',
+    parser.add_argument('--batch-size', type=int, default=30, metavar='N',
                         help='input batch size for testing')
     parser.add_argument('--seed', type=int, default=1, metavar='S',
                         help='random seed (default: 1)')

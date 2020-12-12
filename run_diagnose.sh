@@ -1,6 +1,6 @@
 # Demo for lung cancer diagnosis.
 
-ISBI=${ISBI:-1}
+ISBI=${ISBI:-0}
 GPU=${GPU:-''}
 
 while [ $# -gt 0 ]; do
